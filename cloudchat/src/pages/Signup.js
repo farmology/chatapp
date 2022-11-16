@@ -18,6 +18,7 @@ function Signup() {
         if (!image) return alert('Please upload a profile picture.'); 
         const url = await uploadImage(image);
         console.log(url);
+        //register user
     }
 
     async function uploadImage() {
@@ -83,7 +84,7 @@ function Signup() {
         <Form.Check type="checkbox" label="Check me out" />
       </Form.Group>
       <Button variant="primary" type="submit">
-        Create account
+        {uploadingImg ? 'Registering...' : 'Create account'}
       </Button>
       <div className="py-4">
         <p className="text-center">
