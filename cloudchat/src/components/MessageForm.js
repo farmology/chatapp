@@ -1,6 +1,6 @@
 import React from 'react'
 import { Button, Col, Row, Form } from 'react-bootstrap';
-
+import './MessageForm.css';
 
 function MessageForm() {
     function handleSubmit(e) {
