@@ -4,16 +4,28 @@ import { Link } from 'react-router-dom'
 import './Signup.css'
 import defaultImg from '../assets/almond.png'
 
-function validateImg() {}
-
-function handleSignup(e) {
-    e.preventDefault();
-}
-
 function Signup() {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [name, setName] = useState('');
+    
+    const [image, setImage] = useState(null);
+    const [uploadingImg, setUploadingImg] = useState(false);
+    const [imagePreview, setImagePreview] = useState(null);
+
+    function handleSignup(e) {
+        e.preventDefault();
+    }
+
+    function validateImg(e) {
+        const file = e.target.files[0];
+        if (file.size >= 1048576) {
+            return alert('Max img size is 1mb')
+        } else {
+            setImage(file);
+            setImagePreview(URL.createObjectURL(file));
+        }
+    }
 
   return (
     <Container>
@@ -23,7 +35,7 @@ function Signup() {
     <Form style={{ width: '80%', maxWidth: 500 }} onSubmit={handleSignup} >
         <h1 className='text-center'>Create account</h1>
         <div className='signup-profile-pic__container'>
-            <img src={defaultImg} className='signup-profile-pic'/>
+            <img src={ imagePreview || defaultImg} className='signup-profile-pic'/>
             <label htmlFor='image-upload' className='image-upload-label'>
                 <i className='fas fa-plus-circle add-picture-icon'></i>
             </label>
