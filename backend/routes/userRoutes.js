@@ -21,7 +21,7 @@ router.post('/', async(req, res) => {
 })
 
 // log in user
-router.post('./login', async(req, res) => {
+router.post('/login', async(req, res) => {
     try {
         const {email, password} = req.body;
         const user = await User.findByCredentials(email, password);
@@ -33,3 +33,4 @@ router.post('./login', async(req, res) => {
     } 
 })
 
+module.exports = router
