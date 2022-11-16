@@ -1,5 +1,6 @@
 import React from 'react'
 import { Button, Col, Container, Row, Form } from 'react-bootstrap'
+import { Link } from 'react-router-dom'
 import './Login.css'
 
 function Login() {
@@ -25,8 +26,13 @@ function Login() {
         <Form.Check type="checkbox" label="Check me out" />
       </Form.Group>
       <Button variant="primary" type="submit">
-        Submit
+        Login
       </Button>
+      <div className="py-4">
+        <p className="text-center">
+            Create an account <Link to='/signup' >Signup</Link>
+        </p>
+      </div>
     </Form>
     </Col>
     </Row>
