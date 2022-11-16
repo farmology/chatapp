@@ -13,8 +13,30 @@ function Signup() {
     const [uploadingImg, setUploadingImg] = useState(false);
     const [imagePreview, setImagePreview] = useState(null);
 
-    function handleSignup(e) {
+    async function handleSignup(e) {
         e.preventDefault();
+        if (!image) return alert('Please upload a profile picture.'); 
+        const url = await uploadImage(image);
+        console.log(url);
+    }
+
+    async function uploadImage() {
+        const data = new FormData();
+        data.append('file', image);
+        data.append('upload_preset', 'qj6epnk5');
+        try {
+            setUploadingImg(true);
+            let res = await fetch('https://api.cloudinary.com/v1_1/dbnxrjelt/image/upload', {
+                method: 'post',
+                body: data
+            });
+            const urlData = await res.json();
+            setUploadingImg(false);
+            return urlData.url;
+        } catch(error) {
+            setUploadingImg(false);
+            console.log(error);
+        }
     }
 
     function validateImg(e) {
