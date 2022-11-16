@@ -20,3 +20,16 @@ router.post('/', async(req, res) => {
     }
 })
 
+// log in user
+router.post('./login', async(req, res) => {
+    try {
+        const {email, password} = req.body;
+        const user = await User.findByCredentials(email, password);
+        user.status = 'Online';
+        await user.save();
+        res.status(200).json(user);
+    } catch (e) {
+        res.status(400).json(e.message)
+    } 
+})
+
