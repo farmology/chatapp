@@ -3,12 +3,14 @@ import { Button, Col, Container, Row, Form } from 'react-bootstrap'
 import { Link } from 'react-router-dom'
 import './Signup.css'
 import defaultImg from '../assets/almond.png'
+import { useSignupUserMutation } from '../services/appApi'
 
 function Signup() {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [name, setName] = useState('');
-    
+    const [signupUser, { isLoading, error }] = useSignupUserMutation();
+
     const [image, setImage] = useState(null);
     const [uploadingImg, setUploadingImg] = useState(false);
     const [imagePreview, setImagePreview] = useState(null);
@@ -19,6 +21,11 @@ function Signup() {
         const url = await uploadImage(image);
         console.log(url);
         //register user
+        signupUser({name, email, password, picture: url}).then(({data}) => {
+          if (data) {
+            console.log(data);
+          }
+        });
     }
 
     async function uploadImage() {
