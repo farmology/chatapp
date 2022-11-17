@@ -6,10 +6,18 @@ import Navbar from 'react-bootstrap/Navbar';
 import NavDropdown from 'react-bootstrap/NavDropdown';
 import { useSelector } from 'react-redux';
 import { LinkContainer } from 'react-router-bootstrap';
+import { useLogoutUserMutation } from '../services/appApi';
 
 
 function Navigation() {
   const user = useSelector((state) => state.user);
+  const [logoutUser] = useLogoutUserMutation();
+  async function handleLogout(e) {
+    e.preventDefault();
+    await logoutUser(user);
+    window.location.replace('/');
+  }
+  
   return (
     <Navbar bg="light" expand="lg">
       <Container>
@@ -39,9 +47,11 @@ function Navigation() {
                 Another action
               </NavDropdown.Item>
               <NavDropdown.Item href="#action/3.3">Something</NavDropdown.Item>
-              <NavDropdown.Divider />
-              <NavDropdown.Item href="#action/3.4">
-                Separated link
+              
+              <NavDropdown.Item>
+                <Button variant='danger' onClick={handleLogout}>
+                  Logout
+                </Button>
               </NavDropdown.Item>
             </NavDropdown>
             )}
