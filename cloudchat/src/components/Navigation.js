@@ -27,8 +27,13 @@ function Navigation() {
             <LinkContainer to='/chat'>
                 <Nav.Link>Chat</Nav.Link>
             </LinkContainer>
-            
-            <NavDropdown title="Dropdown" id="basic-nav-dropdown">
+            {user && (
+            <NavDropdown title={
+              <>
+                <img src={user.picture} style={{ width: 30, height: 30, marginRight: 10, objectFit: 'cover', borderRadius: '50%' }} />
+                {user.name}
+              </>
+            } id="basic-nav-dropdown">
               <NavDropdown.Item href="#action/3.1">Action</NavDropdown.Item>
               <NavDropdown.Item href="#action/3.2">
                 Another action
@@ -39,6 +44,7 @@ function Navigation() {
                 Separated link
               </NavDropdown.Item>
             </NavDropdown>
+            )}
           </Nav>
         </Navbar.Collapse>
       </Container>
