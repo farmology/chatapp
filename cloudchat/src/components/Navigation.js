@@ -4,10 +4,12 @@ import Container from 'react-bootstrap/Container';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import NavDropdown from 'react-bootstrap/NavDropdown';
+import { useSelector } from 'react-redux';
 import { LinkContainer } from 'react-router-bootstrap';
 
 
 function Navigation() {
+  const user = useSelector((state) => state.user);
   return (
     <Navbar bg="light" expand="lg">
       <Container>
@@ -17,9 +19,11 @@ function Navigation() {
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="ms-auto">
+            {!user && (
             <LinkContainer to='/login'>
                 <Nav.Link>Login</Nav.Link>
             </LinkContainer>
+            )}
             <LinkContainer to='/chat'>
                 <Nav.Link>Chat</Nav.Link>
             </LinkContainer>
