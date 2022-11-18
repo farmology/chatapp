@@ -43,6 +43,21 @@ function Sidebar() {
         .then((data) => setRooms(data));
     }
 
+    function orderIds(id1, id2) {
+      if(id1 > id2) {
+        return id1 + '-' + id2;
+      } else {
+        return id2 + '-' + id1;
+      }
+    }
+
+    function handlePrivateMemberMsg(member) {
+      setPrivateMemberMsg(member);
+      const roomId = orderIds(user._id, member._id);
+      joinRoom(roomId, false);
+      
+    }
+
     if (!user) {
       return <></>;
     }
@@ -60,7 +75,7 @@ function Sidebar() {
         <h2>Members</h2>
         <ListGroup>
         {members.map((member) => (
-          <ListGroup.Item key={member._id} style={{cursor: 'pointer'}} >{member.name}</ListGroup.Item>
+          <ListGroup.Item key={member._id} style={{cursor: 'pointer'}} active={privateMemberMsg?._id == member?._id} onClick={() => handlePrivateMemberMsg(member)} disabled={member._id === user._id} >{member.name}</ListGroup.Item>
         ))}
         </ListGroup>
     </>
