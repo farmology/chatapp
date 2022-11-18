@@ -61,7 +61,7 @@ io.on('connection', (socket) => {
         socket.join(room);
         let roomMessages = await getLastMessagesFromRoom(room);
         roomMessages = sortRoomMessagesByDate(roomMessages);
-        socket.emit('room=messages', roomMessages)
+        socket.emit('room-messages', roomMessages)
     })
 })
 
