@@ -18,7 +18,7 @@ function Sidebar() {
     }, [])
 
     socket.off('new-user').on('new-user', (payload) => {
-      console.log(payload);
+      
       setMembers(payload);
     } )
     

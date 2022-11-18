@@ -21,6 +21,13 @@ function MessageForm() {
 
     const todayDate = getFormattedDate();
     
+    
+
+    socket.off('room-messages').on('room-messages', (roomMessages) => {
+        console.log(roomMessages[0].messagesByDate.at(-1).content);
+        setMessages(roomMessages);
+    });
+
     function handleSubmit(e) {
         e.preventDefault();
         if (!message) return;
@@ -38,6 +45,8 @@ function MessageForm() {
     <>
     <div className='messages-output'>
         {!user && <div className="alert alert-danger">Please log in.</div>}
+        {messages[0].messagesByDate.at(-1).content}
+        
     </div>
         <Form onSubmit={handleSubmit}>
             <Row>
