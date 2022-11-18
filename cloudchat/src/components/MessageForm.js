@@ -1,5 +1,5 @@
 import React, { useContext, useState } from 'react'
-import { Button, Col, Row, Form } from 'react-bootstrap';
+import { Button, Col, Row, Form, ListGroup } from 'react-bootstrap';
 import { useSelector } from 'react-redux';
 import { AppContext } from '../context/appContext';
 import './MessageForm.css';
@@ -24,7 +24,6 @@ function MessageForm() {
     
 
     socket.off('room-messages').on('room-messages', (roomMessages) => {
-        console.log(roomMessages[0].messagesByDate.at(-1).content);
         setMessages(roomMessages);
     });
 
@@ -45,7 +44,13 @@ function MessageForm() {
     <>
     <div className='messages-output'>
         {!user && <div className="alert alert-danger">Please log in.</div>}
-        {messages[0].messagesByDate.at(-1).content}
+        
+        <ListGroup>            
+            {messages.map((dateArray) => dateArray.messagesByDate.map((msg) => (
+                <ListGroup.Item key={msg._id}>{msg.content}</ListGroup.Item>
+            )))        
+            }
+        </ListGroup>
         
     </div>
         <Form onSubmit={handleSubmit}>
