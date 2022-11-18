@@ -51,7 +51,7 @@ function sortRoomMessagesByDate(messages) {
 io.on('connection', (socket) => {
     
 
-    socket.on('new=user', async() => {
+    socket.on('new-user', async() => {
         const members = await User.find();
         io.emit('new-user', members)
         // emits to every user that new user has joined

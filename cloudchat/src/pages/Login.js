@@ -1,6 +1,7 @@
-import React, { useState } from 'react'
+import React, { useContext, useState } from 'react'
 import { Button, Col, Container, Row, Form } from 'react-bootstrap'
 import { Link, useNavigate } from 'react-router-dom'
+import { AppContext } from '../context/appContext';
 import { useLoginUserMutation } from '../services/appApi';
 import './Login.css'
 
@@ -9,12 +10,14 @@ function Login() {
     const [password, setPassword] = useState('');
     const navigate = useNavigate();
     const [loginUser, { isLoading, error }] = useLoginUserMutation('');
+    const {socket} = useContext(AppContext);
     function handleLogin(e) {
         e.preventDefault();
         //login logic
         loginUser({email, password}).then(({data}) => {
           if (data) {
-            // socketio
+            // user log in updates room list
+            socket.emit('new-user')
             // navigate to the chat
             navigate('/chat');
           }
