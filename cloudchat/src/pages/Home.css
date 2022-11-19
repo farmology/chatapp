@@ -1,5 +1,5 @@
 .home__bg {
-    background-color: black;
+    background-color:#9AD5E6;
     height: 92vh;
     background-position: center;
     background-size: cover;
@@ -13,5 +13,6 @@
 }
 
 .home-info {
-    margin: 10px;
+    
+    text-align: center;
 }

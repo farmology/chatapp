@@ -21,7 +21,7 @@ function App() {
   return (
     <AppContext.Provider value={{ socket, currentRoom, setCurrentRoom, members, setMembers, messages, setMessages, privateMemberMsg, setPrivateMemberMsg, rooms, setRooms, newMessages, setNewMessages }} >
     <BrowserRouter>
-      <Navigation />
+      <Navigation style={{backgroundColor: '#8aa1b1'}}/>
       <Routes>
         <Route path='/' element={<Home />} />
         {!user && (

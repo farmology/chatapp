@@ -85,12 +85,12 @@ function MessageForm() {
     </div>
         <Form onSubmit={handleSubmit}>
             <Row>
-                <Col md={11}>
+                <Col md={10}>
                     <Form.Group>
                         <Form.Control type='text' placeholder='Type message here' disabled={!user} value={message} onChange={(e) => setMessage(e.target.value)}></Form.Control>
                     </Form.Group>
                 </Col>
-                <Col md={1}>
+                <Col md={2}>
                     <Button variant='primary' type='submit' style={{ width: '100%', backgroundColor: 'blue' }} disabled={!user}>
                         <i className='fas fa-paper-plane' ></i>
                     </Button>
