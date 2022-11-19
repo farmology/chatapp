@@ -6,10 +6,12 @@ import "./Home.css";
 function Home() {
   return (
     <Row>
-        <Col md={6} className='d-flex flex-direction-column align-items-center justify-content-center'>
-            <div>
+        <Col className='d-flex flex-direction-column align-items-center justify-content-center'>
+            <div className='home-info'>
+                
                 <h1>Welcome to CloudChat</h1>
-                <p>Made using React, Redux, MongoDB, Express</p>
+                <p>A responsive chat app made using React, Redux, MongoDB, Express, and Socket.io. Supports user creation, user authentication, log in, group chats, and direct messaging. Fully responsive design using React Bootstrap.</p>
+                
                 <LinkContainer to='/chat'>
                     <Button variant='success'>
                         Start Here <i className='fas fa-comments home-message-icon'></i>
