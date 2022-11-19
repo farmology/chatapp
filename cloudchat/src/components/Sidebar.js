@@ -25,7 +25,7 @@ function Sidebar() {
       // notifications
       dispatch(resetNotifications(room));
       socket.off('notifications').on('notifications', (room) => {
-        dispatch(addNotifications(room));
+        if(currentRoom != room) dispatch(addNotifications(room));
       })
     }
 
