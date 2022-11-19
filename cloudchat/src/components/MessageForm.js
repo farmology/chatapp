@@ -51,12 +51,7 @@ function MessageForm() {
     <div className='messages-output'>
         {!user && <div className="alert alert-danger">Please log in.</div>}
         
-        {/* <ListGroup>            
-            {messages.map((dateArray) => dateArray.messagesByDate.map((msg) => (
-                <ListGroup.Item key={msg._id}>{msg.content}</ListGroup.Item>
-            )))        
-            }
-        </ListGroup> */}
+        
         {user &&
                     messages.map(({ _id: date, messagesByDate }, idx) => (
                         <div key={idx}>
