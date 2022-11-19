@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react'
+import React, { useContext, useEffect, useRef, useState } from 'react'
 import { Button, Col, Row, Form, ListGroup } from 'react-bootstrap';
 import { useSelector } from 'react-redux';
 import { AppContext } from '../context/appContext';
@@ -8,6 +8,10 @@ function MessageForm() {
     const [message, setMessage] = useState('');
     const user = useSelector((state) => state.user);
     const {socket, currentRoom, setMessages, messages, privateMemberMsg} = useContext(AppContext);
+    const messageEndRef = useRef(null);
+    useEffect(() => {
+        scrollToBottom();
+    }, [messages]);
 
     function getFormattedDate() {
         const date = new Date();
@@ -21,7 +25,9 @@ function MessageForm() {
 
     const todayDate = getFormattedDate();
     
-    
+    function scrollToBottom() {
+        messageEndRef.current?.scrollIntoView({ behavior: "smooth" });
+    }
 
     socket.off('room-messages').on('room-messages', (roomMessages) => {
         setMessages(roomMessages);
@@ -69,6 +75,7 @@ function MessageForm() {
                             ))}
                         </div>
                     ))}
+                    <div ref={messageEndRef} />
     </div>
         <Form onSubmit={handleSubmit}>
             <Row>
