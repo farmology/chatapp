@@ -1,18 +1,20 @@
 import React, { useContext, useEffect } from 'react'
 import { ListGroup } from 'react-bootstrap'
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { AppContext } from '../context/appContext';
+import { addNotifications, resetNotifications } from '../features/userSlice';
 
 function Sidebar() {
     // const rooms = ['general', 'food', 'books', 'travel']
     const user = useSelector((state) => state.user);
+    const dispatch = useDispatch();
     const {socket, currentRoom, setCurrentRoom, members, setMembers, messages, setMessages, privateMemberMsg, setPrivateMemberMsg, rooms, setRooms, newMessages, setNewMessages} = useContext(AppContext);
     
     function joinRoom(room, isPublic = true) {
       if (!user) {
         return alert('Please log in')
       }
-      socket.emit('join-room', room);
+      socket.emit('join-room', room, currentRoom);
       setCurrentRoom(room);
 
       if(isPublic) {
@@ -20,7 +22,10 @@ function Sidebar() {
       }
 
       // notifications
-      
+      dispatch(resetNotifications(room));
+      socket.off('notifications').on('notifications', (room) => {
+        dispatch(addNotifications(room));
+      })
     }
 
     useEffect(() => {
@@ -68,7 +73,7 @@ function Sidebar() {
         <ListGroup>
             {rooms.map((room, i) => (
                 <ListGroup.Item key={i} onClick={() => joinRoom(room)} active={room == currentRoom} style={{cursor: 'pointer', display: 'flex', justifyContent: 'space-between'}}>
-                  {room} {currentRoom !== room && <span></span>}
+                  {room} {currentRoom !== room && <span className='badge rounded-pill bg-primary'>{user.newMessages[room]}</span>}
                 </ListGroup.Item>
             ))}
         </ListGroup>
