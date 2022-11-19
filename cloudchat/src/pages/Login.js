@@ -1,5 +1,5 @@
 import React, { useContext, useState } from 'react'
-import { Button, Col, Container, Row, Form } from 'react-bootstrap'
+import { Button, Col, Container, Row, Form, Spinner } from 'react-bootstrap'
 import { Link, useNavigate } from 'react-router-dom'
 import { AppContext } from '../context/appContext';
 import { useLoginUserMutation } from '../services/appApi';
@@ -39,6 +39,7 @@ function Login() {
       </Form.Group>
 
       <Form.Group className="mb-3" controlId="formBasicPassword">
+        {error && <p className="alert alert-danger">{error.data}</p>}
         <Form.Label>Password</Form.Label>
         <Form.Control type="password" placeholder="Password" onChange={(e) => setPassword(e.target.value)} value={password} required/>
       </Form.Group>
@@ -46,7 +47,7 @@ function Login() {
         <Form.Check type="checkbox" label="Check me out" />
       </Form.Group>
       <Button variant="primary" type="submit">
-        Login
+        {isLoading ? <Spinner animation="grow" /> : "Login"}
       </Button>
       <div className="py-4">
         <p className="text-center">
