@@ -7,6 +7,7 @@ import NavDropdown from 'react-bootstrap/NavDropdown';
 import { useSelector } from 'react-redux';
 import { LinkContainer } from 'react-router-bootstrap';
 import { useLogoutUserMutation } from '../services/appApi';
+import logo from "../assets/logo.png";
 
 
 function Navigation() {
@@ -22,7 +23,9 @@ function Navigation() {
     <Navbar bg="light" expand="lg">
       <Container>
         <LinkContainer to='/'>
-            <Navbar.Brand>CloudChat</Navbar.Brand>
+            <Navbar.Brand>
+            <img src={logo} style={{ width: 100, height: 100 }} />
+            </Navbar.Brand>
         </LinkContainer>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
