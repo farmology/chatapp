@@ -3,6 +3,7 @@ import { Col, ListGroup, Row } from 'react-bootstrap'
 import { useDispatch, useSelector } from 'react-redux';
 import { AppContext } from '../context/appContext';
 import { addNotifications, resetNotifications } from '../features/userSlice';
+import './Sidebar.css';
 
 function Sidebar() {
     // const rooms = ['general', 'food', 'books', 'travel']
@@ -84,12 +85,12 @@ function Sidebar() {
             <Row>
                         <Col xs={2} className="member-status">
                             <img src={member.picture} className="member-status-img" />
-                            {member.status == "online" ? <i className="fas fa-circle sidebar-online-status"></i> : <i className="fas fa-circle sidebar-offline-status"></i>}
+                            {member.status == "Online" ? <i className="fas fa-circle sidebar-online-status"></i> : <i className="fas fa-circle sidebar-offline-status"></i>}
                         </Col>
                         <Col xs={9}>
                             {member.name}
                             {member._id === user?._id && " (You)"}
-                            {member.status == "offline" && " (Offline)"}
+                            {member.status == "Offline" && " (Offline)"}
                         </Col>
                         <Col xs={1}>
                             <span className="badge rounded-pill bg-primary">{user.newMessages[orderIds(member._id, user._id)]}</span>
